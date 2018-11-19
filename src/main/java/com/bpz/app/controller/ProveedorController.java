@@ -24,13 +24,18 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.bpz.app.entity.Proveedor;
 import com.bpz.app.service.ProveedorService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping("/proveedores")
+@Api(description="REST API para proveedores")
 public class ProveedorController {
 	
 	@Autowired
 	private ProveedorService proveedorService;
 	
+	@ApiOperation("Lista de Proveedores")
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Proveedor>> fecthProveedores(){
 		try {
@@ -42,6 +47,7 @@ public class ProveedorController {
 		}
 	}
 	
+	@ApiOperation("Obtener proveedores por id")
 	@GetMapping( value ="/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Proveedor> fetchProveedor(@PathVariable("id") Long id){
 		try {
@@ -56,6 +62,7 @@ public class ProveedorController {
 		
 	}
 	
+	@ApiOperation("Registro de Proveedores")
 	@PostMapping(consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> saveProveedor(@Valid @RequestBody Proveedor proveedor){
 		try {
@@ -74,6 +81,7 @@ public class ProveedorController {
 		}
 	}
 	
+	@ApiOperation("Actualizar datos de Proveedores")
 	@PutMapping(consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> updateProveedor(@Valid @RequestBody Proveedor proveedor){
 		try {
@@ -85,6 +93,7 @@ public class ProveedorController {
 		}
 	}
 	
+	@ApiOperation("Eliminar un roveedor por id")
 	@DeleteMapping(value="/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> deleteProveedor(@PathVariable("id") Long id) {
 		try {
@@ -101,6 +110,7 @@ public class ProveedorController {
 		}
 	}
 	
+	@ApiOperation("Eliminar todos los proveedores")
 	@DeleteMapping(produces=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> deleteAllProveedores(){
 		try {

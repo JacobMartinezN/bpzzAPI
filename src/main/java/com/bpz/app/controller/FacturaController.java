@@ -23,13 +23,18 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.bpz.app.entity.Factura;
 import com.bpz.app.service.FacturaService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping("/facturas")
+@Api(description ="REST API para facturas")
 public class FacturaController {
 	
 	@Autowired
 	private FacturaService facturaService;
 	
+	@ApiOperation("Lista de Facturas")
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Factura>> fetchFacturas(){
 		try {
@@ -40,6 +45,7 @@ public class FacturaController {
 		}
 	}
 
+	@ApiOperation("Obtener factura por id")
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Factura> fecthFactura(@PathVariable("id") Long id){
 		try {
@@ -53,6 +59,7 @@ public class FacturaController {
 		}
 	}
 	
+	@ApiOperation("Registro de facturas")
 	@PostMapping(consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> saveFactura(@Valid @RequestBody Factura factura){
 		try {
@@ -69,6 +76,7 @@ public class FacturaController {
 		}
 	}
 	
+	@ApiOperation("Actualizar datos de factura")
 	@PutMapping(consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> updateFactura(@Valid @RequestBody Factura factura){
 		try {
@@ -79,6 +87,7 @@ public class FacturaController {
 		}
 	}
 	
+	@ApiOperation("Eliminar factura por id")
 	@DeleteMapping(value="/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> deleteFactura(@PathVariable("id") Long id) {
 		try {
@@ -95,6 +104,7 @@ public class FacturaController {
 		}
 	}
 	
+	@ApiOperation("Eliminar todas las facturas")
 	@DeleteMapping(produces=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> deleteAllFacturas(){
 		try {
